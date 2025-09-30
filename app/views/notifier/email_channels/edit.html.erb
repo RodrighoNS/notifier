@@ -1,0 +1,12 @@
+<% content_for :title, "Editing email channel" %>
+
+<h1>Editing email channel</h1>
+
+<%= render "form", email_channel: @email_channel %>
+
+<br>
+
+<div>
+  <%= link_to "Show this email channel", @email_channel %> |
+  <%= link_to "Back to email channels", email_channels_path %>
+</div>

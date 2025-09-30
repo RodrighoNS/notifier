@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @email_notification %>
+
+<div>
+  <%= link_to "Edit this email notification", edit_email_notification_path(@email_notification) %> |
+  <%= link_to "Back to email notifications", email_notifications_path %>
+
+  <%= button_to "Destroy this email notification", @email_notification, method: :delete %>
+</div>

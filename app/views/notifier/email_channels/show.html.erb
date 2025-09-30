@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @email_channel %>
+
+<div>
+  <%= link_to "Edit this email channel", edit_email_channel_path(@email_channel) %> |
+  <%= link_to "Back to email channels", email_channels_path %>
+
+  <%= button_to "Destroy this email channel", @email_channel, method: :delete %>
+</div>
