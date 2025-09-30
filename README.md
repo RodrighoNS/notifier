@@ -27,19 +27,29 @@ $ rails db:seed
 ### Basic Usage
 
 ```ruby
-# Create an email notification
-notification = Notifier::EmailNotification.create!(
+# Send an email notification (enqueued for background processing)
+response = Notifier::BirthNotification.send(:email,
   title: "Welcome Email",
   body: "Welcome to our service!",
   recipient_email: "user@example.com"
 )
 
-# The notification is automatically assigned to the default email channel
-notification.channel # => #<Notifier::EmailChannel name: "email">
+# Returns job tracking information
+puts response[:job_id]        # => Job ID for tracking
+puts response[:status]        # => "enqueued"
+puts response[:enqueued_at]   # => Timestamp when enqueued
 
-# Access notifications through the channel
+# The notification will be created in the background by NotificationCreationJob
+# and automatically assigned to the default email channel
+
+# Access all notifications through the channel
 channel = Notifier::EmailChannel.default
-channel.notifications # => [notification]
+channel.notifications # => Returns all email notifications for this channel
+
+# Check notification status
+notification = Notifier::EmailNotification.last
+puts notification.status      # => "created" (after job processes)
+puts notification.channel.name # => "email"
 ```
 
 ## Development Setup
