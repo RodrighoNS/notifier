@@ -2,6 +2,8 @@ module Notifier
   class NotificationCreationJob < ApplicationJob
     queue_as :notifications
 
+    self.queue_adapter = :solid_queue
+
     # Configuration for high-volume processing
     retry_on StandardError, wait: :exponentially_longer, attempts: 3
     discard_on ActiveRecord::RecordInvalid
@@ -14,8 +16,6 @@ module Notifier
 
       ActiveRecord::Base.transaction do
         notification = create_notification(notification_type, params)
-        # processor = create_processor(notification_type)
-        # result = processor.process(notification)
       end
 
       Rails.logger.info "#{notification_type.capitalize} notification #{notification.id} created successfully"
@@ -45,14 +45,5 @@ module Notifier
         raise ArgumentError, "Unknown notification type: #{notification_type}"
       end
     end
-
-    # def create_processor(notification_type)
-    #   case notification_type.to_sym
-    #   when :email
-    #     Notifier::EmailProcessor.new
-    #   else
-    #     raise ArgumentError, "Unknown processor for notification type: #{notification_type}"
-    #   end
-    # end
   end
 end
