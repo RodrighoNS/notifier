@@ -5,6 +5,11 @@ A rails engine to send Notifications through specific Channels.
 
 To use this engine in your Rails application, follow these steps:
 
+### Prerequisites
+- Ruby 3.4+
+- Rails 8.0+
+- PostgreSQL
+
 ### Installation
 
 Add this line to your application's Gemfile:
@@ -23,6 +28,9 @@ After installation, run the setup:
 $ rails db:migrate
 $ rails db:seed
 ```
+
+#### Configuration
+The Notifier engine automatically configures Solid Queue for your application. No additional configuration is needed!
 
 ### Basic Usage
 
@@ -55,11 +63,6 @@ puts notification.channel.name # => "email"
 ## Development Setup
 
 For developers who want to work on the engine itself:
-
-### Prerequisites
-- Ruby 3.4+
-- Rails 8.0+
-- PostgreSQL
 
 ### Setup
 
@@ -94,8 +97,5 @@ cd test/dummy
 rails server
 ```
 
-## Contributing
-Contribution directions go here.
-
 ## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The engine is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
