@@ -18,4 +18,4 @@ gem "debug", ">= 1.0.0"
 # Email sending and processing
 gem 'sendgrid-ruby'
 
-gem "solid_queue", "~> 1.2"
+gem "solid_queue", "~> 1.3"
